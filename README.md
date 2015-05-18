@@ -25,24 +25,10 @@ var deepSet = require( 'utils-deep-set' );
 Deep sets a nested property.
 
 ``` javascript
-var obj = {
-	'a': {
-		'b': {
-			'c': 'd'
-		}
-	}
-};
+var obj = { 'a': { 'b': { 'c': 'd' } } };
 
 obj = deepSet( obj, 'a.b.c', 'beep' );
-/* returns
-	{
-		'a': {
-			'b': {
-				'c': 'beep'
-			}
-		}
-	}
-*/
+// returns { 'a': { 'b': { 'c': 'beep' } } }
 ```
 
 
