@@ -1,4 +1,4 @@
-utils-deep-set
+Deep Set
 ===
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependencies][dependencies-image]][dependencies-url]
 
@@ -17,18 +17,39 @@ For use in the browser, use [browserify](https://github.com/substack/node-browse
 ## Usage
 
 ``` javascript
-var foo = require( 'utils-deep-set' );
+var deepSet = require( 'utils-deep-set' );
 ```
 
-#### foo()
+#### deepSet( obj, path, value[, opts] )
 
-What does this function do?
+Deep sets a nested property.
+
+``` javascript
+var obj = {
+	'a': {
+		'b': {
+			'c': 'd'
+		}
+	}
+};
+
+obj = deepSet( obj, 'a.b.c', 'beep' );
+/* returns
+	{
+		'a': {
+			'b': {
+				'c': 'beep'
+			}
+		}
+	}
+*/
+```
 
 
 ## Examples
 
 ``` javascript
-var foo = require( 'utils-deep-set' );
+var deepSet = require( 'utils-deep-set' );
 ```
 
 To run the example code from the top-level application directory,

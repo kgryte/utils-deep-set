@@ -1,3 +1,3 @@
 'use strict';
 
-var foo = require( './../lib' );
+var deepSet = require( './../lib' );

@@ -22,7 +22,18 @@
     "type": "git",
     "url": "git://github.com/kgryte/utils-deep-set.git"
   },
-  "keywords": [],
+  "keywords": [
+  	"utilities",
+  	"utils",
+  	"util",
+  	"deep",
+  	"set",
+  	"assign",
+  	"object",
+  	"array",
+  	"nested",
+  	"property"
+  ],
   "bugs": {
     "url": "https://github.com/kgryte/utils-deep-set/issues"
   },
