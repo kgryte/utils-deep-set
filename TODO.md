@@ -3,8 +3,8 @@ TODO
 
 1. `path` arg 
 	-	`function` (???)
-	-	ability to create arbitrary paths
-	-	set multiple nested props in one go rather than create multiple deep setters
+	-	ability to create dynamic paths
+	-	ability to set multiple nested props in one go rather than create multiple deep setters
 	-	`regex`?
 	-	`array`, which may include strings or regex
 2. prior art
