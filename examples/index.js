@@ -4,6 +4,7 @@ var deepSet = require( './../lib' );
 
 var data,
 	bool,
+	keys,
 	i;
 
 function set( val ) {
@@ -18,8 +19,10 @@ for ( i = 0; i < data.length; i++ ) {
 	};
 }
 
+keys = [ 0, 'y', 2 ];
 for ( i = 0; i < data.length; i++ ) {
-	bool = deepSet( data, i+'.y.2', set );
+	keys[ 0 ] = i;
+	bool = deepSet( data, keys, set );
 	if ( !bool ) {
 		console.error( 'Unable to deep set value.' );
 	}

@@ -60,6 +60,17 @@ var bool = deepSet( arr, '1.a.0.x', 25 );
 */
 ```
 
+The key `path` may be specified as either a delimited `string` or a key `array`.
+
+``` javascript
+var obj = { 'a': { 'b': { 'c': 'd' } } };
+
+var bool = deepSet( obj, ['a','b','c'], 'beep' );
+/*
+	{ 'a': { 'b': { 'c': 'beep' } } }
+*/
+```
+
 If `value` is a `function`, the argument is treated as a `callback` and should return a value to set.
 
 ``` javascript
@@ -151,6 +162,7 @@ var deepSet = require( 'utils-deep-set' );
 
 var data,
 	bool,
+	keys,
 	i;
 
 function set( val ) {
@@ -165,8 +177,10 @@ for ( i = 0; i < data.length; i++ ) {
 	};
 }
 
+keys = [ 0, 'y', 2 ];
 for ( i = 0; i < data.length; i++ ) {
-	bool = deepSet( data, i+'y.2', set );
+	keys[ 0 ] = i;
+	bool = deepSet( data, keys, set );
 	if ( !bool ) {
 		console.error( 'Unable to deep set value.' );
 	}
