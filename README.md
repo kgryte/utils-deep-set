@@ -41,6 +41,12 @@ var bool = deepSet( obj, 'a.b.c', 'woot' );
 
 bool = deepSet( obj, 'a.beep.c', 'boop' );
 // returns false
+
+bool = deepSet( null, 'a.beep.c', 'boop' );
+// returns false
+
+bool = deepSet( 'bap', 'a.beep.c', 'boop' );
+// returns false
 ```
 
 For `paths` including `arrays`, specify the numeric index.
