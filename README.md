@@ -36,7 +36,7 @@ var bool = deepSet( obj, 'a.b.c', 'beep' );
 If the function is able to deep set a nested property, the function returns `true`; otherwise, the function returns `false`.
 
 ``` javascript
-bool = deepSet( obj, 'a.b.c', 'woot' );
+var bool = deepSet( obj, 'a.b.c', 'woot' );
 // returns true
 
 bool = deepSet( obj, 'a.beep.c', 'boop' );
