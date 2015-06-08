@@ -69,24 +69,24 @@ describe( 'deepset', function tests() {
 			'null': null
 		};
 
-		bool = deepSet( obj, 'a.b.c', '.', false, 'beep' );
+		bool = deepSet( obj, ['a','b','c'], false, 'beep' );
 		assert.deepEqual( obj, expected );
 		assert.isTrue( bool );
 	});
 
 	it( 'should return `true` if able to successfully set', function test() {
-		var bool = deepSet( obj, 'a.b.c', '.', false, 'beep' );
+		var bool = deepSet( obj, ['a','b','c'], false, 'beep' );
 		assert.isBoolean( bool );
 		assert.isTrue( bool );
 	});
 
 	it( 'should return `false` if unable to successfully set', function test() {
 		var bool;
-		bool = deepSet( obj, 'a.b.djfajdfaj', '.', false, 'beep' );
+		bool = deepSet( obj, ['a','b','djfajdfaj'], false, 'beep' );
 		assert.isBoolean( bool );
 		assert.isFalse( bool );
 
-		bool = deepSet( obj, 'null.e', '.', false, 'beep' );
+		bool = deepSet( obj, ['null','e'], false, 'beep' );
 		assert.isBoolean( bool );
 		assert.isFalse( bool );
 	});
@@ -113,34 +113,7 @@ describe( 'deepset', function tests() {
 			'null': null
 		};
 
-		bool = deepSet( obj, 'arr.0.y', '.', false, 200 );
-		assert.deepEqual( obj, expected );
-		assert.isTrue( bool );
-	});
-
-	it( 'should allow arbitrary path separators', function test() {
-		var expected, bool;
-
-		expected = {
-			'a': {
-				'b': {
-					'c': 'beep'
-				}
-			},
-			'arr': [
-				{
-					'x': 1,
-					'y': 2
-				},
-				{
-					'x': 3,
-					'y': 4
-				}
-			],
-			'null': null
-		};
-
-		bool = deepSet( obj, 'a/b/c', '/', false, 'beep' );
+		bool = deepSet( obj, ['arr',0,'y'], false, 200 );
 		assert.deepEqual( obj, expected );
 		assert.isTrue( bool );
 	});
@@ -170,7 +143,7 @@ describe( 'deepset', function tests() {
 			'null': null
 		};
 
-		bool = deepSet( obj, 'arr.2.y', '.', true, 200 );
+		bool = deepSet( obj, ['arr',2,'y'], true, 200 );
 		assert.deepEqual( obj, expected );
 		assert.isTrue( bool );
 	});
@@ -197,7 +170,7 @@ describe( 'deepset', function tests() {
 			'null': null
 		};
 
-		bool = deepSet( obj, 'a.b.c', '.', false, set );
+		bool = deepSet( obj, ['a','b','c'], false, set );
 		assert.deepEqual( obj, expected );
 		assert.isTrue( bool );
 
