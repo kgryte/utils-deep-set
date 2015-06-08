@@ -20,22 +20,154 @@ For use in the browser, use [browserify](https://github.com/substack/node-browse
 var deepSet = require( 'utils-deep-set' );
 ```
 
-#### deepSet( obj, path, value[, opts] )
+#### deepSet( obj, path, value[, options] )
+
+Deep set a nested property.
+
+``` javascript
+var obj = { 'a': { 'b': { 'c': 'd' } } };
+
+var bool = deepSet( obj, 'a.b.c', 'beep' );
+/*
+	{ 'a': { 'b': { 'c': 'beep' } } }
+*/
+```
+
+If the function is able to deep set a nested property, the function returns `true`; otherwise, the function returns `false`.
+
+``` javascript
+bool = deepSet( obj, 'a.b.c', 'woot' );
+// returns true
+
+bool = deepSet( obj, 'a.beep.c', 'boop' );
+// returns false
+```
+
+For `paths` including `arrays`, specify the numeric index.
+
+``` javascript
+var arr = [
+	{ 'a': [ {'x': 5} ] },
+	{ 'a': [ {'x': 10} ] }
+];
+
+var bool = deepSet( arr, '1.a.0.x', 25 );
+/*
+	[
+		{ 'a': [ {'x': 5} ] },
+		{ 'a': [ {'x': 25} ] }
+	]
+*/
+```
+
+If `value` is a `function`, the argument is treated as a `callback` and should return a value to set.
+
+``` javascript
+function set( val ) {
+	var ch = val;
+	for ( var i = 0; i < 4; i++ ) {
+		val += ch;
+	}
+	return val;
+}
+var obj = { 'a': { 'b': { 'c': 'd' } } };
+
+var bool = deepSet( obj, 'a.b.c', set );
+/*
+	{ 'a': { 'b': { 'c': 'ddddd' } } }
+*/
+```
+
+The function accepts the following `options`:
+
+*	__sep__: key path separator. Default: `'.'`.
+*	__create__: `boolean` indicating whether to create a path if the key path does not already exist. Default: `false`.
+
+By default, the function assumes `dot` separated key values. To specify an alternative separator, set the `sep` option.
+
+``` javascript
+var obj = { 'a': { 'b': { 'c': 'd' } } };
+
+var bool = deepSet( obj, 'a/b/c', 'beep', {
+	'sep': '/'	
+});
+/*
+	{ 'a': { 'b': { 'c': 'beep' } } }
+*/
+```
+
+To create a key path which does not already exist, set the `create` option to `true`.
+
+``` javascript
+var bool = deepSet( obj, 'a.e.c', 'boop', {
+	'create': true	
+});
+/*
+	{ 
+		'a': { 
+			'b': {
+				'c': 'beep'
+			}, 
+			'e': {
+				'c': 'boop'
+			} 
+		}
+	}
+*/
+```
+
+
+#### deepSet.factory( path[, options] )
+
+Creates a reusable deep set factory. The factory method ensures a `deepSet` function is configured identically by using the same set of provided `options`.
+
+``` javascript
+var ds = deepSet.factory( 'a/b/c', {
+	'create': true,
+	'sep': '/'
+});
+```
+
+
+##### ds( obj, value )
 
 Deep sets a nested property.
 
 ``` javascript
 var obj = { 'a': { 'b': { 'c': 'd' } } };
 
-obj = deepSet( obj, 'a.b.c', 'beep' );
-// returns { 'a': { 'b': { 'c': 'beep' } } }
+var bool = ds( obj, 'beep' );
+/*
+	{ 'a': { 'b': { 'c': 'beep' } } }
+*/
 ```
+
 
 
 ## Examples
 
 ``` javascript
 var deepSet = require( 'utils-deep-set' );
+
+var data,
+	bool,
+	i;
+
+data = new Array( 100 );
+for ( i = 0; i < data.length; i++ ) {
+	data[ i ] = {
+		'x': Date.now(),
+		'y': [ Math.random(), Math.random(), i ]
+	};
+}
+
+for ( i = 0; i < data.length; i++ ) {
+	bool = deepSet( data, i+'y.2', i*10 );
+	if ( !bool ) {
+		console.error( 'Unable to deep set value.' );
+	}
+}
+console.log( data );
 ```
 
 To run the example code from the top-level application directory,
