@@ -122,21 +122,21 @@ var bool = deepSet( obj, 'a.e.c', 'boop', {
 Creates a reusable deep set factory. The factory method ensures a `deepSet` function is configured identically by using the same set of provided `options`.
 
 ``` javascript
-var ds = deepSet.factory( 'a/b/c', {
+var set = deepSet.factory( 'a/b/c', {
 	'create': true,
 	'sep': '/'
 });
 ```
 
 
-##### ds( obj, value )
+#### set( obj, value )
 
 Deep sets a nested property.
 
 ``` javascript
 var obj = { 'a': { 'b': { 'c': 'd' } } };
 
-var bool = ds( obj, 'beep' );
+var bool = set( obj, 'beep' );
 /*
 	{ 'a': { 'b': { 'c': 'beep' } } }
 */
